@@ -2,6 +2,22 @@
 
 Open-source browser extension and wallet companion for the WhiteOwl panel.
 
+## Product Preview
+
+<p align="center">
+	<video src="./ex.mp4" controls muted playsinline preload="metadata" poster="./screenshots/chat-surface.png" width="100%"></video>
+</p>
+
+<p align="center">
+	Browser-side chat, wallet, inspector and context capture running inside the WhiteOwl extension side panel.
+</p>
+
+<p align="center">
+	<a href="./ex.mp4">Open preview video</a> •
+	<a href="https://github.com/whiteowl-engine/WhiteOwl-Extension/releases/latest">Latest release</a> •
+	<a href="https://github.com/whiteowl-engine/WhiteOwl">Main WhiteOwl panel</a>
+</p>
+
 This repository is intended to be the standalone split of the extension layer that works next to the main WhiteOwl panel/backend. It contains the Chrome Manifest V3 extension, side panel UI, provider bridge, wallet flows, token context overlays, page inspection tools, and local integration points for the WhiteOwl runtime.
 
 ## WhiteOwl Stack
@@ -37,22 +53,6 @@ The main WhiteOwl repo is the dashboard, local backend runtime, AI agent layer, 
 		</td>
 	</tr>
 </table>
-
-## Product Preview
-
-<p align="center">
-	<video src="./ex.mp4" controls muted playsinline preload="metadata" poster="./screenshots/chat-surface.png" width="100%"></video>
-</p>
-
-<p align="center">
-	Browser-side chat, wallet, inspector and context capture running inside the WhiteOwl extension side panel.
-</p>
-
-<p align="center">
-	<a href="./ex.mp4">Open preview video</a> •
-	<a href="https://github.com/whiteowl-engine/WhiteOwl-Extension/releases/latest">Latest release</a> •
-	<a href="https://github.com/whiteowl-engine/WhiteOwl">Main WhiteOwl panel</a>
-</p>
 
 ## Install
 
