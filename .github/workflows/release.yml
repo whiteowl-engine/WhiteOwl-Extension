@@ -1,0 +1,43 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate extension repo
+        run: npm run check
+
+      - name: Build release archive
+        shell: pwsh
+        run: ./scripts/package-release.ps1
+
+      - name: Read package version
+        id: pkg
+        shell: bash
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.pkg.outputs.version }}
+          name: WhiteOwl Extension v${{ steps.pkg.outputs.version }}
+          generate_release_notes: true
+          files: dist/whiteowl-extension-v${{ steps.pkg.outputs.version }}.zip

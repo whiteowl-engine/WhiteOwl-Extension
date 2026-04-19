@@ -112,6 +112,29 @@ The validator checks:
 
 The bundled `lightweight-charts.js` file is intentionally excluded from the comment check because its Apache 2.0 license header must remain intact.
 
+### Releases
+
+Tagged versions publish a packaged browser-extension archive into GitHub Releases.
+
+- Releases page: `https://github.com/whiteowl-engine/WhiteOwl-Extension/releases`
+- Release asset format: `whiteowl-extension-v<version>.zip`
+- Packaging command: `npm run package:release`
+
+The release archive is built from the runtime extension files only, so it can be downloaded and loaded directly as an unpacked extension after extraction.
+
+### Packages
+
+This repository also publishes the source package to GitHub Packages.
+
+- Package name: `@whiteowl-engine/extension`
+- Registry: `https://npm.pkg.github.com`
+
+Preview the publish payload locally:
+
+```bash
+npm run package:preview
+```
+
 ## Backend Integration
 
 The extension is not a fully isolated product. It is a companion layer for the WhiteOwl panel.
@@ -153,19 +176,3 @@ This repository currently vendors TradingView Lightweight Charts in `lightweight
 
 - License: Apache License 2.0
 - Notice file: `THIRD_PARTY_NOTICES.md`
-
-## Suggested Repository Positioning
-
-Recommended GitHub description:
-
-`Open-source browser extension and wallet companion for the WhiteOwl panel.`
-
-Recommended topics:
-
-- `whiteowl`
-- `chrome-extension`
-- `manifest-v3`
-- `solana`
-- `wallet`
-- `sidepanel`
-- `ai`

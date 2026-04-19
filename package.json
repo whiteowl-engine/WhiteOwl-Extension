@@ -3,12 +3,57 @@
   "version": "1.1.1",
   "private": false,
   "description": "Standalone WhiteOwl browser extension and wallet companion.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whiteowl-engine/WhiteOwl-Extension.git"
+  },
+  "homepage": "https://github.com/whiteowl-engine/WhiteOwl-Extension#readme",
+  "bugs": {
+    "url": "https://github.com/whiteowl-engine/WhiteOwl-Extension/issues"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "check": "node scripts/validate.mjs"
+    "check": "node scripts/validate.mjs",
+    "package:release": "powershell -ExecutionPolicy Bypass -File ./scripts/package-release.ps1",
+    "package:preview": "npm pack --dry-run",
+    "package:publish": "npm publish"
+  },
+  "files": [
+    "_locales",
+    "2.png",
+    "3.png",
+    "4.png",
+    "5.png",
+    "6.png",
+    "LICENSE",
+    "PRIVACY.md",
+    "README.md",
+    "SECURITY.md",
+    "THIRD_PARTY_NOTICES.md",
+    "background.js",
+    "content.js",
+    "ex.mp4",
+    "i18n-ext.js",
+    "icon128.png",
+    "icon16.png",
+    "icon48.png",
+    "lightweight-charts.js",
+    "logo.png",
+    "manifest.json",
+    "owl.svg",
+    "provider.js",
+    "result_transparent.webm",
+    "screenshots",
+    "sidepanel.css",
+    "sidepanel.html",
+    "sidepanel.js",
+    "swap-progress.webm"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "keywords": [
     "whiteowl",
