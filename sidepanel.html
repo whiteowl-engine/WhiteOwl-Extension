@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhiteOwl AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oxanium:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div id="wo-root">
+    <div id="wo-header">
+      <div class="wo-logo">
+        <span class="wo-logo-owl"><img src="logo.png" style="width:28px;height:28px;object-fit:contain;border-radius:50%"></span>
+        <span><span class="wo-brand-mark">WhiteOwl</span> <strong>AI</strong></span>
+      </div>
+      <div class="wo-header-pills">
+        <div class="wo-net-label">SOL</div>
+        <div class="wo-status offline" id="wo-conn">Offline</div>
+      </div>
+    </div>
+
+    <div id="wo-tabs">
+      <button class="wo-tab active" data-tab="token">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="15.5"></line><polyline points="22 8.5 12 15.5 2 8.5"></polyline><polyline points="2 15.5 12 8.5 22 15.5"></polyline><line x1="12" y1="2" x2="12" y2="8.5"></line></svg>
+        <span>Token</span>
+      </button>
+      <button class="wo-tab" data-tab="chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg>
+        <span>Chat</span>
+      </button>
+      <button class="wo-tab" data-tab="inspector">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path></svg>
+        <span>Inspector</span>
+      </button>
+      <button class="wo-tab" data-tab="wallet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
+        <span>Wallet</span>
+      </button>
+    </div>
+
+    <div class="wo-tab-content active" data-tab="token">
+      <div id="wo-token-card">
+        <div class="wo-no-token" id="wo-no-token">
+          <div class="wo-no-token-stage">
+            <div class="wo-no-token-art-wrap">
+              <img class="wo-no-token-art" src="2.png" alt="" aria-hidden="true">
+            </div>
+          </div>
+          <div class="wo-no-token-card">
+            <div class="wo-no-token-eyebrow"><span class="wo-nt-pulse"></span> Awaiting token signal</div>
+            <div class="wo-no-token-title">No token detected</div>
+            <div class="wo-no-token-sub">Navigate to any token on pump.fun — analysis appears instantly.</div>
+          </div>
+        </div>
+        <div id="wo-token-info" style="display:none">
+          <div class="wo-tk-header">
+            <div class="wo-tk-icon" id="wo-tk-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="15.5"></line><polyline points="22 8.5 12 15.5 2 8.5"></polyline><polyline points="2 15.5 12 8.5 22 15.5"></polyline><line x1="12" y1="2" x2="12" y2="8.5"></line></svg>
+            </div>
+            <div class="wo-tk-meta">
+              <div class="wo-tk-name-row">
+                <span class="wo-tk-name" id="wo-tk-name"></span>
+                <span class="wo-tk-ticker" id="wo-tk-ticker"></span>
+              </div>
+              <div class="wo-tk-mint" id="wo-tk-mint"></div>
+            </div>
+          </div>
+          <div class="wo-tk-stats" id="wo-tk-stats"></div>
+          <div class="wo-tk-live" id="wo-tk-live"></div>
+          <div class="wo-tk-actions">
+            <button class="wo-tk-action-btn wo-tk-action-primary" id="wo-analyze-btn">
+              <span class="wo-tk-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
+              <span class="wo-tk-action-label">Analyze</span>
+            </button>
+            <button class="wo-tk-action-btn wo-tk-action-default" id="wo-rate-btn">
+              <span class="wo-tk-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+              <span class="wo-tk-action-label">Rate</span>
+            </button>
+            <button class="wo-tk-action-btn wo-tk-action-green" id="wo-deep-btn">
+              <span class="wo-tk-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+              <span class="wo-tk-action-label">Search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="wo-token-result" style="display:none;padding:12px;overflow-y:auto;flex:1"></div>
+    </div>
+
+    <div class="wo-tab-content" data-tab="chat">
+      <div class="wo-chat-topbar" id="wo-chat-topbar">
+        <button class="wo-chat-topbar-btn" id="wo-chat-list-btn" title="Chat list" aria-expanded="false" aria-controls="wo-chat-list-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="wo-chat-topbar-title" id="wo-chat-title">New Chat</div>
+        <button class="wo-chat-topbar-btn" id="wo-chat-new-btn" title="New chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+      </div>
+      <div class="wo-chat-stage" id="wo-chat-stage">
+        <div class="wo-chat-list-overlay" id="wo-chat-list-overlay" aria-hidden="true">
+          <button class="wo-chat-list-backdrop" id="wo-chat-list-backdrop" aria-label="Close chat list"></button>
+          <div class="wo-chat-list-panel" id="wo-chat-list-panel">
+            <div class="wo-chat-list-head">
+              <div class="wo-chat-list-head-copy">
+                <div class="wo-chat-list-head-label">Chat Sessions</div>
+                <div class="wo-chat-list-head-sub">Jump between threads without leaving the desk</div>
+              </div>
+              <button class="wo-chat-list-close" id="wo-chat-list-close" title="Close chat list" aria-label="Close chat list">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
+            <div class="wo-chat-list-items" id="wo-chat-list-items"></div>
+          </div>
+        </div>
+        <div class="wo-chat-shell">
+          <div class="wo-chat-hero">
+            <div class="wo-chat-hero-mark">
+              <span class="wo-chat-hero-owl"><img src="logo.png" style="width:100%;height:100%;object-fit:contain;border-radius:50%"></span>
+            </div>
+            <div class="wo-chat-hero-copy">
+              <div class="wo-chat-hero-kicker">WhiteOwl Signal Desk</div>
+              <div class="wo-chat-hero-title">Editorial command layer for live token context</div>
+              <div class="wo-chat-hero-sub">Read flow, decode narratives and route fast intelligence without drowning the panel in noise.</div>
+            </div>
+          </div>
+          <div id="wo-messages">
+            <div class="wo-msg sys">Connect to WhiteOwl to start chatting</div>
+          </div>
+        </div>
+        <div id="wo-quick">
+          <button class="wo-qbtn" data-cmd="trenches"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Trenches</button>
+          <button class="wo-qbtn" data-cmd="monitor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg> Monitor</button>
+          <button class="wo-qbtn" data-cmd="trending"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> Trending</button>
+          <button class="wo-qbtn" data-cmd="news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path><path d="M18 14h-8"></path><path d="M15 18h-5"></path><path d="M10 6h8v4h-8V6Z"></path></svg> News</button>
+          <button class="wo-qbtn" data-cmd="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg> Portfolio</button>
+        </div>
+        <div id="wo-input-area">
+          <div id="wo-quote-preview"><span class="wo-quote-text"></span><span class="wo-quote-close" id="wo-quote-close-btn">&times;</span></div>
+          <textarea id="wo-input" placeholder="Ask WhiteOwl anything..." rows="1"></textarea>
+          <button id="wo-send-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wo-tab-content" data-tab="inspector">
+      <div id="wo-inspector-content">
+        <div class="wo-insp-hero">
+          <div class="wo-insp-hero-visual">
+            <div class="wo-insp-eye-video-wrap">
+              <video class="wo-insp-eye-video" autoplay muted loop playsinline preload="auto">
+                <source src="ex.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="wo-insp-hero-copy">
+            <div class="wo-insp-header">
+              <div class="wo-insp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path></svg></div>
+              <div>
+                <div class="wo-insp-title">Context Inspector</div>
+                <div class="wo-insp-sub">Capture fragments, not clutter</div>
+              </div>
+            </div>
+            <div class="wo-insp-hero-text">Freeze the exact on-page signal you care about and pipe it into the desk with clean, minimal context.</div>
+            <div class="wo-insp-hero-actions">
+              <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-insp-start-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Start Inspector
+              </button>
+          <div class="wo-insp-actions" id="wo-insp-actions">
+            <button class="wo-btn wo-btn-success wo-btn-xs" id="wo-insp-send-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Send All
+            </button>
+            <button class="wo-btn wo-btn-danger wo-btn-xs" id="wo-insp-clear-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> Clear
+            </button>
+          </div>
+        </div>
+        </div>
+        </div>
+        <div class="wo-insp-active-bar" id="wo-insp-active">
+          <div class="wo-insp-pulse"></div>
+          <span>Inspector active — click any element</span>
+          <button class="wo-btn wo-btn-danger wo-btn-xs" id="wo-insp-stop-btn2">Stop</button>
+        </div>
+        <div class="wo-insp-captures" id="wo-insp-list">
+          <div class="wo-insp-empty"><span class="wo-insp-empty-count" id="wo-insp-count">0 captured</span>No elements captured yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wo-tab-content" data-tab="wallet">
+
+      <div class="wo-wlt-topbar" id="wo-wlt-topbar">
+        <button class="wo-wlt-topbar-back" id="wo-wlt-back-ai">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="wo-wlt-topbar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="wo-wlt-topbar-icon"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
+          <span>Wallet</span>
+        </div>
+        <div class="wo-wlt-topbar-right">
+          <div class="wo-status" id="wo-wlt-conn-badge">Mainnet</div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-views-area">
+
+      <div class="wo-wlt-view" id="wo-wlt-pin">
+        <div class="wo-pin-screen">
+          <div class="wo-pin-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <div class="wo-pin-title" id="wo-pin-title">Enter PIN</div>
+          <div class="wo-pin-subtitle" id="wo-pin-subtitle">6-digit PIN to access your wallet</div>
+          <div class="wo-pin-dots" id="wo-pin-dots">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="wo-pin-error" id="wo-pin-error"></div>
+          <div class="wo-pin-numpad" id="wo-pin-numpad"></div>
+          <button class="wo-pin-forgot" id="wo-pin-forgot">Forgot PIN &middot; Reset</button>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-setup">
+        <div class="wo-wlt-setup-scroll">
+          <div class="wo-wlt-setup-header">
+            <img class="wo-wlt-setup-art" src="6.png" alt="" aria-hidden="true">
+            <div class="wo-wlt-setup-owl">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
+            </div>
+            <h2>Solana Wallet</h2>
+            <p>Choose how to get started</p>
+          </div>
+          <div class="wo-wlt-options" id="wo-wlt-options">
+            <button class="wo-wlt-option" id="wo-wlt-gen-seed-btn">
+              <div class="wo-wlt-option-icon gen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <div class="wo-wlt-option-body">
+                <div class="wo-wlt-option-title">Generate with Seed Phrase</div>
+                <div class="wo-wlt-option-sub">Random address + 12-word recovery</div>
+              </div>
+              <svg class="wo-wlt-option-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-wlt-option" id="wo-wlt-gen-vanity-btn">
+              <div class="wo-wlt-option-icon gen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+              </div>
+              <div class="wo-wlt-option-body">
+                <div class="wo-wlt-option-title">Generate Wo-address</div>
+                <div class="wo-wlt-option-sub">Address starts with Wo (private key only)</div>
+              </div>
+              <svg class="wo-wlt-option-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-wlt-option" id="wo-wlt-import-btn">
+              <div class="wo-wlt-option-icon key">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+              </div>
+              <div class="wo-wlt-option-body">
+                <div class="wo-wlt-option-title">Import Private Key</div>
+                <div class="wo-wlt-option-sub">Paste your base58 private key</div>
+              </div>
+              <svg class="wo-wlt-option-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-wlt-option" id="wo-wlt-gen-burn-btn">
+              <div class="wo-wlt-option-icon burn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+              </div>
+              <div class="wo-wlt-option-body">
+                <div class="wo-wlt-option-title">Burn Wallet</div>
+                <div class="wo-wlt-option-sub">Auto-approve all dApp requests (no popups)</div>
+              </div>
+              <svg class="wo-wlt-option-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-wlt-option" id="wo-wlt-seed-btn">
+              <div class="wo-wlt-option-icon seed">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"></path><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path><path d="M8 8a4 4 0 0 1 8 0"></path></svg>
+              </div>
+              <div class="wo-wlt-option-body">
+                <div class="wo-wlt-option-title">Recover from Seed Phrase</div>
+                <div class="wo-wlt-option-sub">12 or 24 words (BIP39)</div>
+              </div>
+              <svg class="wo-wlt-option-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-wlt-option" id="wo-wlt-multisig-btn">
+              <div class="wo-wlt-option-icon multisig">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <div class="wo-wlt-option-body">
+                <div class="wo-wlt-option-title">Multisig Vaults</div>
+                <div class="wo-wlt-option-sub">M-of-N shared wallets (Squads v4)</div>
+              </div>
+              <svg class="wo-wlt-option-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <div class="wo-wlt-form" id="wo-wlt-import-form">
+            <div class="wo-wlt-form-title">Import Private Key</div>
+            <textarea id="wo-wlt-pk-input" class="wo-wlt-textarea" placeholder="Enter base58-encoded private key..." rows="3" autocomplete="off" spellcheck="false"></textarea>
+            <div class="wo-wlt-form-name">
+              <input type="text" id="wo-wlt-pk-name" class="wo-wlt-input" placeholder="Wallet name (optional)">
+            </div>
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="wo-btn wo-btn-sm" id="wo-wlt-import-cancel">Cancel</button>
+              <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-wlt-import-confirm">Import Wallet</button>
+            </div>
+            <div class="wo-wlt-form-status" id="wo-import-status"></div>
+          </div>
+
+          <div class="wo-wlt-form" id="wo-wlt-seed-form">
+            <div class="wo-wlt-form-title">Recover from Seed Phrase</div>
+            <textarea id="wo-wlt-seed-input" class="wo-wlt-textarea" placeholder="Enter 12 or 24-word seed phrase, separated by spaces..." rows="4" autocomplete="off" spellcheck="false"></textarea>
+            <div class="wo-wlt-form-name">
+              <input type="text" id="wo-wlt-seed-name" class="wo-wlt-input" placeholder="Wallet name (optional)">
+            </div>
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="wo-btn wo-btn-sm" id="wo-wlt-seed-cancel">Cancel</button>
+              <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-wlt-seed-confirm">Recover Wallet</button>
+            </div>
+            <div class="wo-wlt-form-status" id="wo-seed-status"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-home">
+        <div class="wo-wlt-home-scroll">
+          <div class="wo-wlt-balance-card">
+            <video class="wo-wlt-hero-art" src="result_transparent.webm" autoplay loop muted playsinline aria-hidden="true"></video>
+            <div class="wo-wlt-balance-net">Solana Mainnet</div>
+            <div class="wo-wlt-balance" id="wo-wlt-balance">
+              <span class="wo-wlt-bal-num" id="wo-wlt-bal-num">—</span>
+              <span class="wo-wlt-bal-sym">SOL</span>
+              <button class="wo-bal-refresh" id="wo-bal-refresh" title="Refresh balance">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>
+              </button>
+            </div>
+            <div class="wo-wlt-bal-usd" id="wo-wlt-bal-usd"></div>
+            <div class="wo-wlt-addr-row">
+              <div class="wo-wlt-addr-text" id="wo-wlt-addr-short">—</div>
+              <button class="wo-wlt-addr-copy" id="wo-wlt-addr-copy" title="Copy address">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+            <div class="wo-wlt-wallet-name" id="wo-wlt-wallet-name"></div>
+            <div class="wo-wlt-connected-site" id="wo-wlt-connected-site" style="display:none">
+              <span class="wo-conn-dot"></span>
+              <span class="wo-conn-label" id="wo-wlt-conn-label">Not connected</span>
+            </div>
+          </div>
+          <div class="wo-wlt-actions">
+            <button class="wo-wlt-action" data-view="deposit">
+              <div class="wo-wlt-action-icon deposit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"></path></svg>
+              </div>
+              <span>Deposit</span>
+            </button>
+            <button class="wo-wlt-action" data-view="send">
+              <div class="wo-wlt-action-icon send">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </div>
+              <span>Send</span>
+            </button>
+            <button class="wo-wlt-action" id="wo-wlt-private-send-btn">
+              <div class="wo-wlt-action-icon private-send">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </div>
+              <span>Private</span>
+            </button>
+          </div>
+          <div class="wo-wlt-tabs">
+            <button class="wo-wlt-tab active" data-wlt-tab="tokens">Tokens</button>
+            <button class="wo-wlt-tab" data-wlt-tab="nfts">NFTs</button>
+            <button class="wo-wlt-tab" data-wlt-tab="activity">Activity</button>
+            <button class="wo-wlt-tab" data-wlt-tab="swap">Swap</button>
+            <button class="wo-wlt-tab wo-wlt-tab-soon" data-wlt-tab="bridge" disabled>Bridge <span class="wo-soon-badge">Soon</span></button>
+            <button class="wo-wlt-tab wo-wlt-tab-settings" data-wlt-tab="settings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wo-wlt-tab-icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span>Settings</span>
+            </button>
+          </div>
+          <div class="wo-wlt-tab-content" id="wo-wlt-tab-tokens" style="display:flex">
+            <div id="wo-wlt-token-list"><div class="wo-wlt-empty-sm">Loading tokens…</div></div>
+          </div>
+          <div class="wo-wlt-tab-content" id="wo-wlt-tab-nfts" style="display:none">
+            <div id="wo-wlt-nft-list"><div class="wo-wlt-empty-sm">Loading NFTs…</div></div>
+          </div>
+          <div class="wo-wlt-tab-content" id="wo-wlt-tab-activity" style="display:none">
+            <div id="wo-wlt-recent-list"><div class="wo-wlt-empty-sm">No recent transactions</div></div>
+          </div>
+
+          <div class="wo-wlt-tab-content" id="wo-wlt-tab-swap" style="display:none">
+            <div class="wo-swap-panel">
+              <div class="wo-swap-box">
+                <div class="wo-swap-field">
+                  <div class="wo-swap-field-top">
+                    <span class="wo-swap-field-label">You pay</span>
+                    <span class="wo-swap-from-bal-row"><button class="wo-swap-max-btn" id="wo-swap-max" title="Use max balance">MAX</button><span class="wo-swap-field-bal" id="wo-swap-from-bal">Balance: —</span></span>
+                  </div>
+                  <div class="wo-swap-field-row">
+                    <input type="number" class="wo-swap-input" id="wo-swap-from-amt" placeholder="0.0" min="0" step="any">
+                    <button class="wo-swap-token-btn" id="wo-swap-from-token">
+                      <span>SOL</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                  </div>
+                </div>
+                <button class="wo-swap-flip" id="wo-swap-flip" title="Swap direction">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                </button>
+                <div class="wo-swap-field">
+                  <div class="wo-swap-field-top">
+                    <span class="wo-swap-field-label">You receive</span>
+                    <span class="wo-swap-field-bal" id="wo-swap-to-bal">Balance: —</span>
+                  </div>
+                  <div class="wo-swap-field-row">
+                    <input type="number" class="wo-swap-input" id="wo-swap-to-amt" placeholder="0.0" readonly>
+                    <button class="wo-swap-token-btn" id="wo-swap-to-token">
+                      <span>USDC</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="wo-swap-details">
+                <div class="wo-swap-detail-row">
+                  <span>Slippage</span>
+                  <div class="wo-swap-slippage-row">
+                    <button class="wo-swap-slip-btn active" data-slip="0.5">0.5%</button>
+                    <button class="wo-swap-slip-btn" data-slip="1">1%</button>
+                    <button class="wo-swap-slip-btn" data-slip="3">3%</button>
+                    <input type="number" class="wo-swap-slip-custom" id="wo-swap-slip-custom" placeholder="Custom" min="0.01" max="50" step="0.1">
+                  </div>
+                </div>
+                <div class="wo-swap-detail-row" id="wo-swap-rate-row" style="display:none">
+                  <span>Rate</span>
+                  <span id="wo-swap-rate">—</span>
+                </div>
+                <div class="wo-swap-detail-row" id="wo-swap-impact-row" style="display:none">
+                  <span>Price Impact</span>
+                  <span id="wo-swap-impact">—</span>
+                </div>
+              </div>
+
+              <div class="wo-swap-route-row" id="wo-swap-route-row" style="display:none">
+                <span class="wo-swap-route-rate" id="wo-swap-route-rate"></span>
+                <button class="wo-swap-route-toggle" id="wo-swap-route-toggle" title="Toggle route details">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                </button>
+              </div>
+              <button class="wo-btn wo-btn-primary wo-btn-sm wo-swap-confirm" id="wo-swap-confirm" style="width:100%;margin-top:10px">
+                Swap
+              </button>
+              <div class="wo-wlt-form-status" id="wo-swap-status"></div>
+
+              <div class="wo-swap-quotes-section" id="wo-swap-quotes-section" style="display:none">
+                <div class="wo-swap-quotes-hd">
+                  <span class="wo-swap-quotes-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                  </span>
+                  <span class="wo-swap-quotes-title">Quotes</span>
+                  <span class="wo-swap-quotes-count" id="wo-swap-quotes-count"></span>
+                  <span class="wo-swap-quotes-via" id="wo-swap-quotes-via"></span>
+                  <span class="wo-swap-quotes-info" title="Comparing prices across multiple aggregators">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  </span>
+                </div>
+                <div class="wo-swap-quotes-list" id="wo-swap-quotes-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wo-wlt-tab-content" id="wo-wlt-tab-bridge" style="display:none">
+            <div class="wo-bridge-panel" id="wo-bridge-panel">
+              <div class="wo-bridge-locked" id="wo-bridge-locked" style="display:none">
+                <div class="wo-bridge-locked-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <div class="wo-bridge-locked-title">Bridge Unavailable</div>
+                <div class="wo-bridge-locked-sub">Enable EVM Networks in Settings or add an EVM wallet to use the cross-chain bridge.</div>
+                <button class="wo-btn wo-btn-sm wo-btn-primary" id="wo-bridge-go-settings">Open Settings</button>
+              </div>
+              <div class="wo-bridge-active" id="wo-bridge-active">
+
+                <div class="wo-bridge-evm-notice hidden" id="wo-bridge-evm-notice">
+                  <div class="wo-bridge-evm-notice-icon">⚠</div>
+                  <div class="wo-bridge-evm-notice-text"><strong>EVM Networks</strong> are required for cross-chain bridges. Enable them to use bridging.</div>
+                  <button class="wo-bridge-evm-enable-btn" id="wo-bridge-evm-enable">Enable</button>
+                </div>
+                <div class="wo-swap-box">
+                  <div class="wo-swap-field">
+                    <div class="wo-swap-field-top">
+                      <span class="wo-swap-field-label">From</span>
+                      <span class="wo-swap-field-bal" id="wo-bridge-from-bal">Balance: —</span>
+                    </div>
+                    <div class="wo-bridge-chain-row">
+                      <button class="wo-bridge-chain-btn" id="wo-bridge-from-chain">
+                        <span>Solana</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </button>
+                      <button class="wo-swap-token-btn" id="wo-bridge-from-token">
+                        <span>SOL</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </button>
+                    </div>
+                    <div class="wo-swap-field-row">
+                      <input type="number" class="wo-swap-input" id="wo-bridge-from-amt" placeholder="0.0" min="0" step="any">
+                    </div>
+                  </div>
+                  <button class="wo-swap-flip" id="wo-bridge-flip" title="Swap chains">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                  </button>
+                  <div class="wo-swap-field">
+                    <div class="wo-swap-field-top">
+                      <span class="wo-swap-field-label">To</span>
+                    </div>
+                    <div class="wo-bridge-chain-row">
+                      <button class="wo-bridge-chain-btn" id="wo-bridge-to-chain">
+                        <span>Ethereum</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </button>
+                      <button class="wo-swap-token-btn" id="wo-bridge-to-token">
+                        <span>ETH</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </button>
+                    </div>
+                    <div class="wo-swap-field-row">
+                      <input type="number" class="wo-swap-input" id="wo-bridge-to-amt" placeholder="0.0" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="wo-bridge-routes" id="wo-bridge-routes" style="display:none"></div>
+                <div class="wo-bridge-routes-loading" id="wo-bridge-routes-loading" style="display:none">Searching best routes…</div>
+                <div class="wo-bridge-no-routes" id="wo-bridge-no-routes" style="display:none">No routes found</div>
+                <div class="wo-swap-details">
+                  <div class="wo-swap-detail-row" id="wo-bridge-fee-row" style="display:none">
+                    <span>Bridge Fee</span>
+                    <span id="wo-bridge-fee">—</span>
+                  </div>
+                  <div class="wo-swap-detail-row" id="wo-bridge-time-row" style="display:none">
+                    <span>Est. Time</span>
+                    <span id="wo-bridge-time">—</span>
+                  </div>
+                  <div class="wo-swap-detail-row" id="wo-bridge-via-row" style="display:none">
+                    <span>Via</span>
+                    <span id="wo-bridge-via">—</span>
+                  </div>
+                </div>
+                <button class="wo-btn wo-btn-primary wo-btn-sm wo-swap-confirm" id="wo-bridge-confirm" style="width:100%;margin-top:10px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  Bridge
+                </button>
+                <div class="wo-wlt-form-status" id="wo-bridge-status"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wo-wlt-tab-content" id="wo-wlt-tab-settings" style="display:none">
+            <div class="wo-wlt-settings-inline">
+              <button class="wo-sett-cat" data-sett-cat="wallets">
+                <div class="wo-sett-cat-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
+                </div>
+                <div><div class="wo-sett-row-name">Wallets</div><div class="wo-sett-row-sub">Manage your wallets</div></div>
+                <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+              </button>
+              <button class="wo-sett-cat" data-sett-cat="networks">
+                <div class="wo-sett-cat-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </div>
+                <div><div class="wo-sett-row-name">Networks</div><div class="wo-sett-row-sub">RPC, EVM chains</div></div>
+                <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+              </button>
+              <button class="wo-sett-cat" data-sett-cat="security">
+                <div class="wo-sett-cat-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <div><div class="wo-sett-row-name">Security</div><div class="wo-sett-row-sub">PIN, Guardian, Auto-lock</div></div>
+                <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-deposit">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Deposit SOL</span>
+          <span></span>
+        </div>
+        <div class="wo-deposit-content">
+          <div class="wo-deposit-qr" id="wo-deposit-qr">
+            <div class="wo-qr-inner" id="wo-qr-inner">
+              <canvas id="wo-qr-canvas" width="180" height="180"></canvas>
+            </div>
+          </div>
+          <div class="wo-deposit-label">Your Solana Address</div>
+          <div class="wo-deposit-addr-box">
+            <div class="wo-deposit-addr-text" id="wo-deposit-addr-text">—</div>
+            <button class="wo-btn wo-btn-sm wo-btn-primary" id="wo-deposit-copy">Copy</button>
+          </div>
+          <div class="wo-deposit-hint">Send only SOL on the Solana network to this address</div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-send-picker">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Choose Asset</span>
+          <span></span>
+        </div>
+        <div class="wo-send-picker-content">
+          <div class="wo-send-picker-hero">
+            <div class="wo-send-picker-kicker">Send</div>
+            <div class="wo-send-picker-title">Pick what you want to move</div>
+            <div class="wo-send-picker-subtitle">Tokens stay in the main lane. NFTs live in their own gallery below.</div>
+          </div>
+          <div class="wo-send-picker-search">
+            <span class="wo-send-picker-search-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="text" id="wo-send-picker-q" class="wo-wlt-input" placeholder="Search assets, symbols, or contracts...">
+          </div>
+          <div id="wo-send-picker-list"><div class="wo-wlt-empty-sm">Loading…</div></div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-send">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="send-picker">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Send SOL</span>
+          <span></span>
+        </div>
+        <div class="wo-send-content">
+          <div class="wo-send-avail" id="wo-send-avail">Available: — SOL</div>
+          <div class="wo-send-field">
+            <label class="wo-send-label">Recipient Address</label>
+            <input type="text" id="wo-send-to" class="wo-wlt-input" placeholder="Solana wallet address...">
+          </div>
+          <div class="wo-send-field">
+            <label class="wo-send-label">Amount (SOL)</label>
+            <div class="wo-send-amt-row">
+              <input type="number" id="wo-send-amt" class="wo-wlt-input" placeholder="0.000" min="0" step="0.001">
+              <button class="wo-btn wo-btn-xs" id="wo-send-max">MAX</button>
+            </div>
+          </div>
+          <div class="wo-send-fee-hint">≈ 0.000005 SOL network fee</div>
+          <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-send-confirm" style="margin-top:12px;width:100%">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            Send
+          </button>
+          <div class="wo-wlt-form-status" id="wo-send-status"></div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-send-token">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="send-picker">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title" id="wo-send-token-title">Send Token</span>
+          <span></span>
+        </div>
+        <div class="wo-send-content">
+          <div class="wo-send-avail" id="wo-send-token-avail">Available: —</div>
+          <div class="wo-send-token-info" id="wo-send-token-info"></div>
+          <div class="wo-send-field">
+            <label class="wo-send-label">Recipient Address</label>
+            <input type="text" id="wo-send-token-to" class="wo-wlt-input" placeholder="Solana wallet address...">
+          </div>
+          <div class="wo-send-field" id="wo-send-token-amt-field">
+            <label class="wo-send-label">Amount</label>
+            <div class="wo-send-amt-row">
+              <input type="number" id="wo-send-token-amt" class="wo-wlt-input" placeholder="0.000" min="0" step="any">
+              <button class="wo-btn wo-btn-xs" id="wo-send-token-max">MAX</button>
+            </div>
+          </div>
+          <div class="wo-send-fee-hint">≈ 0.000005 SOL network fee + ATA creation if needed</div>
+          <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-send-token-confirm" style="margin-top:12px;width:100%">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            Send
+          </button>
+          <div class="wo-wlt-form-status" id="wo-send-token-status"></div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-private-send">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Private Send</span>
+          <span></span>
+        </div>
+        <div class="wo-send-content">
+          <div class="wo-private-send-info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex-shrink:0"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            <span>Funds are routed through <strong>Houdini Swap</strong> privacy pools. The recipient cannot trace the sender — on-chain link is fully broken.</span>
+          </div>
+          <div class="wo-psend-warnings">
+            <div class="wo-psend-warn-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Takes a few minutes</span>
+            </div>
+            <div class="wo-psend-warn-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span>Higher fees (service + network)</span>
+            </div>
+          </div>
+          <div class="wo-send-avail" id="wo-psend-avail">Available: — SOL</div>
+          <div class="wo-send-field">
+            <label class="wo-send-label">Recipient Address</label>
+            <input type="text" id="wo-psend-to" class="wo-wlt-input" placeholder="Solana wallet address...">
+          </div>
+          <div class="wo-send-field">
+            <label class="wo-send-label">Amount (SOL)</label>
+            <div class="wo-send-amt-row">
+              <input type="number" id="wo-psend-amt" class="wo-wlt-input" placeholder="0.000" min="0" step="0.001">
+              <button class="wo-btn wo-btn-xs" id="wo-psend-max">MAX</button>
+            </div>
+          </div>
+
+          <div class="wo-psend-quote" id="wo-psend-quote" style="display:none">
+            <div class="wo-psend-quote-row"><span>Recipient gets</span><strong id="wo-psend-q-receive">—</strong></div>
+            <div class="wo-psend-quote-row"><span>Service fee</span><span id="wo-psend-q-fee">—</span></div>
+            <div class="wo-psend-quote-row"><span>Est. time</span><span id="wo-psend-q-eta">2-5 min</span></div>
+          </div>
+          <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-psend-confirm" style="margin-top:12px;width:100%">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            Private Send
+          </button>
+          <div class="wo-wlt-form-status" id="wo-psend-status"></div>
+
+          <div class="wo-psend-progress" id="wo-psend-progress" style="display:none">
+            <div class="wo-psend-step" id="wo-psend-s1" data-step="deposit"><span class="wo-psend-step-dot"></span><span>Sending to Houdini…</span></div>
+            <div class="wo-psend-step" id="wo-psend-s2" data-step="confirming"><span class="wo-psend-step-dot"></span><span>Confirming deposit…</span></div>
+            <div class="wo-psend-step" id="wo-psend-s3" data-step="exchanging"><span class="wo-psend-step-dot"></span><span>Routing privately…</span></div>
+            <div class="wo-psend-step" id="wo-psend-s4" data-step="sending"><span class="wo-psend-step-dot"></span><span>Delivering to recipient…</span></div>
+            <div class="wo-psend-step" id="wo-psend-s5" data-step="finished"><span class="wo-psend-step-dot"></span><span>Complete ✓</span></div>
+          </div>
+          <div class="wo-psend-powered">Powered by <strong>Houdini Swap</strong></div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-history">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Transaction History</span>
+          <button class="wo-wlt-refresh" id="wo-hist-refresh" title="Refresh">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          </button>
+        </div>
+        <div class="wo-wlt-tx-scroll">
+          <div id="wo-wlt-tx-list"><div class="wo-wlt-empty">No transactions found</div></div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-settings">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Settings</span>
+          <span></span>
+        </div>
+        <div class="wo-sett-menu-scroll">
+          <div class="wo-sett-who-card">
+            <div class="wo-sett-who-av" id="wo-sett-avatar">W</div>
+            <div class="wo-sett-who-info">
+              <div class="wo-sett-who-name" id="wo-sett-active-name">Wallet</div>
+              <div class="wo-sett-who-addr" id="wo-sett-active-addr">—</div>
+            </div>
+          </div>
+          <div class="wo-sett-cats">
+            <button class="wo-sett-cat" data-sett-cat="wallets">
+              <div class="wo-sett-ci wo-sett-ci-wallets">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="15" rx="3"/><path d="M2 10h20M16 14h.01"/></svg>
+              </div>
+              <div class="wo-sett-cat-texts">
+                <div class="wo-sett-cat-name">Wallets</div>
+                <div class="wo-sett-cat-sub" id="wo-cat-sub-wallets">Manage your wallets</div>
+              </div>
+              <svg class="wo-sett-cat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-sett-cat" data-sett-cat="networks">
+              <div class="wo-sett-ci wo-sett-ci-networks">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div class="wo-sett-cat-texts">
+                <div class="wo-sett-cat-name">Networks</div>
+                <div class="wo-sett-cat-sub">Solana · EVM · Custom RPC</div>
+              </div>
+              <svg class="wo-sett-cat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-sett-cat" data-sett-cat="security">
+              <div class="wo-sett-ci wo-sett-ci-security">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="wo-sett-cat-texts">
+                <div class="wo-sett-cat-name">Security & Actions</div>
+                <div class="wo-sett-cat-sub">PIN · Auto-lock · Export</div>
+              </div>
+              <svg class="wo-sett-cat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-sett-cat" data-sett-cat="connected-sites">
+              <div class="wo-sett-ci" style="background:rgba(34,197,94,0.12);color:#22c55e">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              </div>
+              <div class="wo-sett-cat-texts">
+                <div class="wo-sett-cat-name">Connected Sites</div>
+                <div class="wo-sett-cat-sub" id="wo-cat-sub-connsites">Manage dApp connections</div>
+              </div>
+              <svg class="wo-sett-cat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button class="wo-sett-cat" data-sett-cat="services">
+              <div class="wo-sett-ci" style="background:rgba(168,85,247,0.12);color:#a855f7">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div class="wo-sett-cat-texts">
+                <div class="wo-sett-cat-name">Services</div>
+                <div class="wo-sett-cat-sub">Houdini Swap · API keys</div>
+              </div>
+              <svg class="wo-sett-cat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+          <div class="wo-sett-footer">WhiteOwl · v1.0</div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-sett-connected-sites">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Connected Sites</span>
+          <span></span>
+        </div>
+        <div class="wo-sett-scroll">
+          <div class="wo-sett-section">
+            <div class="wo-sett-section-hd">Active Connections</div>
+            <div id="wo-conn-sites-list" class="wo-conn-sites-list">
+              <div class="wo-conn-empty">No connected sites</div>
+            </div>
+            <button class="wo-btn wo-btn-danger wo-btn-sm wo-btn-block" id="wo-disconnect-all-btn" style="margin-top:12px;display:none">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+              Disconnect All
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-sett-wallets">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Wallets</span>
+          <span></span>
+        </div>
+        <div class="wo-sett-scroll">
+          <div class="wo-sett-section">
+            <div class="wo-sett-section-hd">My Wallets</div>
+            <div id="wo-wlt-list"></div>
+            <div class="wo-sett-add-btn-wrap">
+              <button class="wo-btn wo-btn-success wo-btn-sm wo-btn-block" id="wo-wlt-add-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Add Wallet
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-sett-networks">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Networks</span>
+          <span></span>
+        </div>
+        <div class="wo-sett-scroll">
+          <div class="wo-sett-section">
+            <div class="wo-sett-section-hd">Networks</div>
+            <div class="wo-sett-row">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon sol">
+                  <svg viewBox="0 0 397.7 311.7" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px"><defs><linearGradient id="sol-grad" x1="360" y1="351" x2="-95" y2="-44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#9945ff"/><stop offset="100%" stop-color="#14f195"/></linearGradient></defs><path fill="url(#sol-grad)" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zm0-164.6c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zM333.1 3.8C330.7 1.4 327.4 0 323.9 0H6.5C.7 0-2.2 7 1.9 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1L333.1 3.8z"/></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name">Solana</div>
+                  <div class="wo-sett-row-sub">Always enabled</div>
+                </div>
+              </div>
+              <div class="wo-toggle on disabled"></div>
+            </div>
+            <button class="wo-sett-row wo-sett-row-btn" id="wo-sol-rpc-btn">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon" style="background:rgba(153,69,255,0.12);color:#a78bfa">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"></path></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name">Solana RPC</div>
+                  <div class="wo-sett-row-sub" id="wo-sol-rpc-label">api.mainnet-beta.solana.com</div>
+                </div>
+              </div>
+              <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            </button>
+            <div id="wo-networks-list"></div>
+            <div class="wo-sett-add-btn-wrap">
+              <button class="wo-btn wo-btn-sm wo-btn-block" id="wo-add-net-btn" style="border-color:rgba(139,92,246,0.25);color:var(--primary2)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Add Custom Network
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-sett-services">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Services</span>
+          <span></span>
+        </div>
+        <div class="wo-sett-scroll">
+          <div class="wo-sett-section">
+            <div class="wo-sett-section-hd" style="display:flex;align-items:center;gap:6px">
+              <span style="color:#a855f7">🎩</span> Houdini Swap
+              <button class="wo-houdini-info-btn" id="wo-houdini-info-btn" title="What is Houdini Swap?">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </button>
+            </div>
+            <div class="wo-sett-row-desc">Private Send uses Houdini Swap to break on-chain links between sender and recipient.</div>
+            <label class="wo-sett-field-label">API Key</label>
+            <div class="wo-sett-field-row">
+              <input type="password" id="wo-houdini-key" class="wo-sett-field-input" placeholder="Your Houdini API key" autocomplete="off" spellcheck="false">
+              <button class="wo-sett-field-eye" id="wo-houdini-key-eye" title="Show/hide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <label class="wo-sett-field-label" style="margin-top:10px">API Secret</label>
+            <div class="wo-sett-field-row">
+              <input type="password" id="wo-houdini-secret" class="wo-sett-field-input" placeholder="Your Houdini API secret" autocomplete="off" spellcheck="false">
+              <button class="wo-sett-field-eye" id="wo-houdini-secret-eye" title="Show/hide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div class="wo-sett-field-status" id="wo-houdini-status"></div>
+            <button class="wo-btn wo-btn-sm wo-btn-primary wo-btn-block" id="wo-houdini-save" style="margin-top:12px">Save Houdini Keys</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-houdini-popup-overlay" id="wo-houdini-popup" style="display:none">
+        <div class="wo-houdini-popup">
+          <div class="wo-houdini-popup-hd">
+            <span>🎩 Houdini Swap</span>
+            <button class="wo-modal-close" id="wo-houdini-popup-close">&times;</button>
+          </div>
+          <div class="wo-houdini-popup-body">
+            <p><strong>What is Houdini Swap?</strong></p>
+            <p>Houdini Swap is a non-custodial privacy transaction protocol. It uses liquidity pools and routing to break the on-chain link between sender and recipient.</p>
+            <p><strong>How to get API keys:</strong></p>
+            <ol>
+              <li>Go to <strong>houdiniswap.com</strong></li>
+              <li>Register as a Partner in the developer section</li>
+              <li>Generate an API Key + Secret in your dashboard</li>
+              <li>Paste them here</li>
+            </ol>
+            <p><strong>Fees:</strong> Houdini charges a small service fee (shown in the quote before sending).</p>
+            <p><strong>Time:</strong> Private sends typically take 2–5 minutes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-sett-security">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" data-back="settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Security & Actions</span>
+          <span></span>
+        </div>
+        <div class="wo-sett-scroll">
+          <div class="wo-sett-section">
+            <div class="wo-sett-section-hd">Security</div>
+            <button class="wo-sett-row wo-sett-row-btn" id="wo-guardian-setup-btn">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon sec" style="background:rgba(34,197,94,.12);color:#22c55e">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name">Guardian Wallet</div>
+                  <div class="wo-sett-row-sub" id="wo-guardian-status-text">Cosigner for outgoing transfers</div>
+                </div>
+              </div>
+              <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            </button>
+            <button class="wo-sett-row wo-sett-row-btn" id="wo-change-pin-btn">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon sec">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="M15.5 7.5h4.5V12"></path></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name">Change PIN</div>
+                  <div class="wo-sett-row-sub">Update your 6-digit PIN</div>
+                </div>
+              </div>
+              <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            </button>
+            <div class="wo-sett-row">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon sec" style="background:rgba(34,197,94,.12);color:#22c55e">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name">TX Safety Check</div>
+                  <div class="wo-sett-row-sub">Auto-check before every transaction</div>
+                </div>
+              </div>
+              <div class="wo-toggle on" id="wo-safety-toggle"></div>
+            </div>
+            <div class="wo-sett-row">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon timer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2.5"></path><path d="M9 2h6"></path><path d="M12 2v3"></path></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name">Auto-lock</div>
+                  <div class="wo-sett-row-sub">Lock after inactivity</div>
+                </div>
+              </div>
+              <select id="wo-autolock-select" class="wo-sett-select">
+                <option value="5">5 min</option>
+                <option value="10" selected>10 min</option>
+                <option value="30">30 min</option>
+                <option value="60">1 hour</option>
+                <option value="0">Never</option>
+              </select>
+            </div>
+          </div>
+          <div class="wo-sett-section">
+            <div class="wo-sett-section-hd">Wallet Actions</div>
+            <button class="wo-sett-row wo-sett-row-btn" id="wo-wlt-export-btn">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon sec" style="background:rgba(96,165,250,.12);color:#60a5fa">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name">Export Private Key</div>
+                  <div class="wo-sett-row-sub">Reveals your secret key</div>
+                </div>
+              </div>
+              <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            </button>
+            <button class="wo-sett-row wo-sett-row-btn" id="wo-wlt-lock-btn" style="color:var(--red)">
+              <div class="wo-sett-row-info">
+                <div class="wo-net-icon" style="background:rgba(248,113,113,0.12);color:var(--red)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V8a5 5 0 0 1 10 0v3"></path></svg>
+                </div>
+                <div>
+                  <div class="wo-sett-row-name" style="color:var(--red)">Lock Wallet</div>
+                  <div class="wo-sett-row-sub">Require PIN on next action</div>
+                </div>
+              </div>
+              <div class="wo-sett-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-multisig">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" id="wo-multisig-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title">Multisig Vaults</span>
+          <button class="wo-wlt-refresh" id="wo-multisig-refresh" title="Refresh">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          </button>
+        </div>
+        <div class="wo-wlt-tx-scroll" style="padding:12px">
+          <div id="wo-multisig-list"><div class="wo-wlt-empty">Loading...</div></div>
+          <div id="wo-multisig-action-btns" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-multisig-create-btn" style="flex:1">+ Create Vault</button>
+            <button class="wo-btn wo-btn-sm" id="wo-multisig-import-btn" style="flex:1">Import by Address</button>
+          </div>
+
+          <div class="wo-wlt-form" id="wo-multisig-create-form">
+            <div class="wo-wlt-form-title">✦ Create Multisig Vault</div>
+            <input type="text" id="wo-mc-name" class="wo-wlt-input" placeholder="Vault name (e.g. Team Treasury)" autocomplete="off">
+            <textarea id="wo-mc-members" class="wo-wlt-textarea" rows="3"
+              placeholder="Member public keys, one per line or comma-separated&#10;(leave empty — your wallet will be the sole member)"
+              autocomplete="off" spellcheck="false"></textarea>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:11px;color:var(--muted);white-space:nowrap">Threshold:</span>
+              <input type="number" id="wo-mc-threshold" class="wo-wlt-input" min="1" value="1" style="width:72px;flex-shrink:0">
+              <span style="font-size:11px;color:var(--muted)">of N must sign</span>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="wo-btn wo-btn-sm" id="wo-mc-cancel">Cancel</button>
+              <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-mc-confirm">Create Vault</button>
+            </div>
+            <div class="wo-wlt-form-status" id="wo-mc-status"></div>
+          </div>
+
+          <div class="wo-wlt-form" id="wo-multisig-import-form">
+            <div class="wo-wlt-form-title">↓ Import Multisig Vault</div>
+            <input type="text" id="wo-mi-pda" class="wo-wlt-input" placeholder="Squads multisig address..." autocomplete="off" spellcheck="false">
+            <input type="text" id="wo-mi-name" class="wo-wlt-input" placeholder="Vault name (optional)" autocomplete="off">
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="wo-btn wo-btn-sm" id="wo-mi-cancel">Cancel</button>
+              <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-mi-confirm">Import Vault</button>
+            </div>
+            <div class="wo-wlt-form-status" id="wo-mi-status"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wo-wlt-view" id="wo-wlt-vault-detail">
+        <div class="wo-wlt-nav">
+          <button class="wo-wlt-back" id="wo-vault-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="wo-wlt-nav-title" id="wo-vault-nav-title">Vault</span>
+          <button class="wo-wlt-refresh" id="wo-vault-refresh" title="Refresh">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          </button>
+        </div>
+        <div class="wo-wlt-tx-scroll" style="padding:12px">
+          <div id="wo-vault-info-card"></div>
+          <div id="wo-vault-members-card" style="margin-top:8px"></div>
+          <div style="font-size:.75rem;font-weight:600;color:var(--muted);margin:12px 0 6px;text-transform:uppercase;letter-spacing:.04em">Proposals</div>
+          <div id="wo-vault-proposals"><div class="wo-wlt-empty">Loading…</div></div>
+          <div id="wo-vault-action-btns" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-vault-use-wallet-btn" style="flex:1;background:rgba(139,92,246,.15);color:#7c3aed;border-color:rgba(139,92,246,.3)">Use as Main Wallet</button>
+            <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-vault-propose-btn" style="flex:1">+ Propose Transfer</button>
+          </div>
+
+          <div class="wo-wlt-form" id="wo-vault-propose-form">
+            <div class="wo-wlt-form-title">→ Propose SOL Transfer</div>
+            <input type="text" id="wo-vp-to" class="wo-wlt-input" placeholder="Recipient address (Solana)..." autocomplete="off" spellcheck="false">
+            <input type="number" id="wo-vp-amount" class="wo-wlt-input" placeholder="Amount in SOL" min="0" step="any">
+            <input type="text" id="wo-vp-memo" class="wo-wlt-input" placeholder="Memo (optional)" autocomplete="off">
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="wo-btn wo-btn-sm" id="wo-vp-cancel">Cancel</button>
+              <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-vp-confirm">Submit Proposal</button>
+            </div>
+            <div class="wo-wlt-form-status" id="wo-vp-status"></div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+  </div>
+
+  <div id="wo-custom-net-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box">
+      <div class="wo-modal-hd">
+        <span class="wo-modal-title">Custom Network</span>
+        <button class="wo-modal-close" id="wo-cn-cancel">&times;</button>
+      </div>
+      <div class="wo-modal-body">
+        <label class="wo-send-label">Network Name</label>
+        <input id="wo-cn-name" class="wo-wlt-input" placeholder="e.g. Fantom" style="margin-bottom:8px">
+        <label class="wo-send-label">Chain ID</label>
+        <input id="wo-cn-chainid" class="wo-wlt-input" type="number" placeholder="e.g. 250" style="margin-bottom:8px">
+        <label class="wo-send-label">RPC URL</label>
+        <input id="wo-cn-rpc" class="wo-wlt-input" placeholder="https://rpc.example.com" style="margin-bottom:8px">
+        <label class="wo-send-label">Currency Symbol</label>
+        <input id="wo-cn-symbol" class="wo-wlt-input" placeholder="e.g. FTM" style="margin-bottom:10px">
+        <input type="hidden" id="wo-cn-editidx">
+        <div id="wo-cn-error" style="font-size:11px;color:var(--red);min-height:16px;margin-bottom:6px"></div>
+        <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-block" id="wo-cn-save">Save Network</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="wo-sol-rpc-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box">
+      <div class="wo-modal-hd">
+        <span class="wo-modal-title">Solana RPC Endpoint</span>
+        <button class="wo-modal-close" id="wo-rpc-cancel">&times;</button>
+      </div>
+      <div class="wo-modal-body">
+        <label class="wo-send-label" style="margin-bottom:6px;display:block">RPC URL</label>
+        <input id="wo-sol-rpc-input" class="wo-wlt-input" placeholder="https://api.mainnet-beta.solana.com" style="margin-bottom:10px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+          <button class="wo-btn wo-btn-xs wo-rpc-preset" data-rpc="https://api.mainnet-beta.solana.com">Official</button>
+          <button class="wo-btn wo-btn-xs wo-rpc-preset" data-rpc="https://rpc.ankr.com/solana">Ankr</button>
+          <button class="wo-btn wo-btn-xs wo-rpc-preset" data-rpc="https://solana-mainnet.g.alchemy.com/v2/demo">Alchemy</button>
+        </div>
+        <div id="wo-rpc-status" style="font-size:11px;min-height:16px;margin-bottom:6px"></div>
+        <div style="display:flex;gap:8px">
+          <button class="wo-btn wo-btn-sm wo-btn-block" id="wo-rpc-check" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--text)">Check RPC</button>
+          <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-block" id="wo-rpc-save" style="flex:1">Save RPC</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wo-key-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box">
+      <div class="wo-modal-hd">
+        <span class="wo-modal-title" id="wo-key-modal-title">Wallet Created</span>
+        <button class="wo-modal-close" id="wo-key-modal-close">&times;</button>
+      </div>
+      <div class="wo-modal-body" style="gap:10px">
+        <div class="wo-key-warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span id="wo-key-warn-text">Save your private key — it will <strong>not</strong> be shown again.</span>
+        </div>
+        <div id="wo-key-addr-wrap" style="display:none">
+          <div class="wo-send-label" style="margin-bottom:4px">Address</div>
+          <div class="wo-key-box" id="wo-key-addr"></div>
+        </div>
+        <div id="wo-key-seed-wrap" style="display:none">
+          <div class="wo-send-label" style="margin-bottom:4px">Seed Phrase (12 words)</div>
+          <div class="wo-key-box wo-key-seed" id="wo-key-seed"></div>
+          <button class="wo-btn wo-btn-sm wo-btn-block" id="wo-key-copy-seed" style="margin-top:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Seed Phrase
+          </button>
+        </div>
+        <div>
+          <div class="wo-send-label" style="margin-bottom:4px">Private Key</div>
+          <div class="wo-key-box wo-key-pk" id="wo-key-pk"></div>
+        </div>
+        <button class="wo-btn wo-btn-sm wo-btn-block" id="wo-key-copy" style="margin-top:2px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Private Key
+        </button>
+        <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-block" id="wo-key-modal-ok">I saved it — close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="wo-guardian-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box">
+      <div class="wo-modal-hd">
+        <img class="wo-modal-seal wo-modal-seal-guardian" src="4.png" alt="" aria-hidden="true">
+        <span class="wo-modal-title"><svg class="wo-modal-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Guardian Wallet</span>
+        <button class="wo-modal-close" id="wo-guardian-modal-close">&times;</button>
+      </div>
+      <div class="wo-modal-body" style="gap:12px">
+        <div class="wo-guardian-explain">
+          A guardian wallet acts as a <strong>cosigner</strong> for all outgoing transfers.
+          It pays network fees and must co-sign every transaction — even if someone gets your main key, they cannot send without the guardian.
+        </div>
+        <div class="wo-guardian-toggle-row">
+          <span class="wo-guardian-label">Enable Guardian</span>
+          <label class="wo-switch">
+            <input type="checkbox" id="wo-guardian-enabled">
+            <span class="wo-switch-slider"></span>
+          </label>
+        </div>
+        <div id="wo-guardian-fields" style="display:none">
+          <div class="wo-send-field">
+            <label class="wo-send-label">Guardian Private Key</label>
+            <input type="password" id="wo-guardian-key" class="wo-wlt-input" placeholder="Base58 private key…">
+            <div class="wo-guardian-hint">This wallet will pay fees & cosign every send. Keep it funded with a small SOL balance (~0.01 SOL).</div>
+          </div>
+          <div id="wo-guardian-addr-show" class="wo-guardian-addr" style="display:none">
+            <span class="wo-send-label">Guardian Address:</span>
+            <span id="wo-guardian-addr-text" class="wo-guardian-addr-val"></span>
+          </div>
+        </div>
+        <div class="wo-wlt-form-status" id="wo-guardian-status"></div>
+        <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-block" id="wo-guardian-save">Save</button>
+        <button class="wo-btn wo-btn-sm wo-btn-block" id="wo-guardian-remove" style="color:var(--red);display:none">Remove Guardian</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="wo-swap-approve-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box">
+      <div class="wo-modal-hd">
+        <img class="wo-modal-seal" src="3.png" alt="" aria-hidden="true">
+        <span class="wo-modal-title">Confirm Swap</span>
+        <button class="wo-modal-close" id="wo-swap-approve-close">&times;</button>
+      </div>
+      <div class="wo-modal-body" style="gap:10px">
+        <div class="wo-approve-swap-pair">
+          <div class="wo-approve-swap-side">
+            <span class="wo-approve-swap-label">You pay</span>
+            <span class="wo-approve-swap-val" id="wo-approve-from-amt">—</span>
+            <span class="wo-approve-swap-sym" id="wo-approve-from-sym">SOL</span>
+          </div>
+          <div class="wo-approve-swap-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div class="wo-approve-swap-side">
+            <span class="wo-approve-swap-label">You receive</span>
+            <span class="wo-approve-swap-val" id="wo-approve-to-amt">—</span>
+            <span class="wo-approve-swap-sym" id="wo-approve-to-sym">USDC</span>
+          </div>
+        </div>
+        <div class="wo-approve-details">
+          <div class="wo-approve-row"><span>Route</span><span id="wo-approve-agg">Best Price</span></div>
+          <div class="wo-approve-row"><span>Slippage</span><span id="wo-approve-slip">0.5%</span></div>
+          <div class="wo-approve-row"><span>Rate</span><span id="wo-approve-rate">—</span></div>
+          <div class="wo-approve-row"><span>Price Impact</span><span id="wo-approve-impact">—</span></div>
+          <div class="wo-approve-row"><span>Network Fee</span><span>~0.000005 SOL</span></div>
+        </div>
+        <div class="wo-approve-warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Output amount is an estimate. You may receive less due to slippage.</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="wo-btn wo-btn-sm wo-btn-full" id="wo-swap-approve-reject">Cancel</button>
+          <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-swap-approve-confirm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>
+            Confirm Swap
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wo-safety-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box" style="max-width:380px">
+      <div class="wo-modal-hd">
+        <span class="wo-safety-shield" id="wo-safety-shield">🛡️</span>
+        <span class="wo-modal-title" id="wo-safety-title">Transaction Safety</span>
+        <button class="wo-modal-close" id="wo-safety-close">&times;</button>
+      </div>
+      <div class="wo-modal-body" style="gap:10px">
+
+        <div class="wo-safety-tx-summary" id="wo-safety-tx-summary"></div>
+
+        <div class="wo-safety-risk-section" id="wo-safety-risk-section" style="display:none">
+          <div class="wo-safety-risk-header">
+            <span class="wo-safety-risk-label">Risk Score</span>
+            <span class="wo-safety-risk-value" id="wo-safety-risk-value">—</span>
+          </div>
+          <div class="wo-safety-risk-bar">
+            <div class="wo-safety-risk-fill" id="wo-safety-risk-fill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="wo-safety-warnings" id="wo-safety-warnings" style="display:none"></div>
+
+        <div class="wo-safety-ai" id="wo-safety-ai-section" style="display:none">
+          <div class="wo-safety-ai-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span>AI Analysis</span>
+            <span class="wo-safety-ai-verdict" id="wo-safety-ai-verdict"></span>
+          </div>
+          <div class="wo-safety-ai-body" id="wo-safety-ai-body"></div>
+        </div>
+
+        <div class="wo-safety-loading" id="wo-safety-loading">
+          <div class="wo-safety-spinner"></div>
+          <span id="wo-safety-loading-text">Checking transaction safety...</span>
+        </div>
+
+        <div class="wo-safety-actions">
+          <button class="wo-btn wo-btn-sm" id="wo-safety-ai-btn" title="Deep AI analysis">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            AI Check
+          </button>
+          <button class="wo-btn wo-btn-sm" id="wo-safety-cancel">Cancel</button>
+          <button class="wo-btn wo-btn-primary wo-btn-sm" id="wo-safety-proceed">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="20 6 9 17 4 12"/></svg>
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wo-connect-approve-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box">
+      <div class="wo-modal-hd">
+        <img class="wo-modal-seal" src="5.png" alt="" aria-hidden="true">
+        <span class="wo-modal-title">Connection Request</span>
+        <button class="wo-modal-close" id="wo-connect-approve-close">&times;</button>
+      </div>
+      <div class="wo-modal-body" style="gap:12px">
+        <div class="wo-connect-site">
+          <div class="wo-connect-site-icon" id="wo-connect-site-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="wo-connect-site-info">
+            <span class="wo-connect-site-name" id="wo-connect-site-name">Unknown Site</span>
+            <span class="wo-connect-site-url" id="wo-connect-site-url">https://example.com</span>
+          </div>
+        </div>
+        <div class="wo-connect-perms">
+          <span class="wo-connect-perms-title">This site wants to:</span>
+          <div class="wo-connect-perm-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--green)"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span>View your wallet address</span>
+          </div>
+          <div class="wo-connect-perm-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--green)"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Request transaction approval</span>
+          </div>
+        </div>
+        <div class="wo-connect-wallet-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;color:var(--primary2)"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          <span id="wo-connect-wallet-addr">—</span>
+        </div>
+
+        <div id="wo-connect-ai-scan-section">
+          <button class="wo-btn wo-btn-sm wo-btn-full" id="wo-connect-ai-scan-btn" style="background:rgba(139,92,246,0.08);color:var(--primary2);border:1px solid rgba(139,92,246,0.25);font-size:12px;gap:6px;padding:8px 12px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            AI Deep Scan
+          </button>
+          <div id="wo-connect-ai-scan-loading" style="display:none;text-align:center;padding:10px;font-size:12px;color:var(--text2)">
+            <span style="display:inline-block;animation:spin 1s linear infinite;margin-right:6px">🔍</span> AI scanning page code &amp; content...
+          </div>
+          <div id="wo-connect-ai-scan-result" style="display:none;background:var(--bg3);border-radius:10px;padding:10px 12px">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+              <span id="wo-connect-ai-icon">🤖</span>
+              <span style="font-weight:700;font-size:13px;color:var(--text)">AI Verdict</span>
+              <span id="wo-connect-ai-verdict" style="margin-left:auto;font-size:13px;font-weight:700"></span>
+            </div>
+            <div id="wo-connect-ai-summary" style="font-size:12px;color:var(--text2);margin-bottom:6px;line-height:1.4"></div>
+            <div id="wo-connect-ai-risks" style="font-size:11px;display:flex;flex-direction:column;gap:3px;max-height:120px;overflow-y:auto"></div>
+            <div id="wo-connect-ai-recommendation" style="font-size:11px;color:var(--text2);margin-top:6px;font-style:italic;padding-top:6px;border-top:1px solid var(--border)"></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="wo-btn wo-btn-sm wo-btn-full" id="wo-connect-reject">Reject</button>
+          <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-connect-approve">Connect</button>
+        </div>
+        <div id="wo-connect-alt-wallets" style="display:none;gap:6px;flex-direction:column;margin-top:4px;padding-top:8px;border-top:1px solid var(--border)"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wo-tx-approve-modal" class="wo-modal-overlay">
+    <div class="wo-modal-box" style="max-width:400px">
+      <div class="wo-modal-hd">
+        <span id="wo-tx-shield">🛡️</span>
+        <span class="wo-modal-title" id="wo-tx-title">Approve Transaction</span>
+        <button class="wo-modal-close" id="wo-tx-approve-close">&times;</button>
+      </div>
+      <div class="wo-modal-body" style="gap:10px">
+        <div class="wo-connect-site" style="margin-bottom:4px">
+          <div class="wo-connect-site-icon" id="wo-tx-site-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="wo-connect-site-info">
+            <span class="wo-connect-site-name" id="wo-tx-site-name">Unknown Site</span>
+            <span class="wo-connect-site-url" id="wo-tx-site-url">—</span>
+          </div>
+        </div>
+
+        <div class="wo-tx-preview" id="wo-tx-preview">
+          <div class="wo-approve-row"><span>Type</span><span id="wo-tx-type">Transaction</span></div>
+          <div class="wo-approve-row"><span>Estimated Fee</span><span>~0.000005 SOL</span></div>
+        </div>
+
+        <div class="wo-safety-loading" id="wo-tx-sim-loading">
+          <div class="wo-safety-spinner"></div>
+          <span id="wo-tx-sim-loading-text">Simulating transaction…</span>
+        </div>
+
+        <div class="wo-safety-risk-section" id="wo-tx-risk-section" style="display:none">
+          <div class="wo-safety-risk-header">
+            <span class="wo-safety-risk-label">Risk Score</span>
+            <span class="wo-safety-risk-value" id="wo-tx-risk-value">—</span>
+          </div>
+          <div class="wo-safety-risk-bar">
+            <div class="wo-safety-risk-fill" id="wo-tx-risk-fill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div id="wo-tx-instructions" style="display:none"></div>
+
+        <div class="wo-safety-warnings" id="wo-tx-warnings" style="display:none"></div>
+
+        <div class="wo-safety-ai" id="wo-tx-ai-section" style="display:none">
+          <div class="wo-safety-ai-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span>AI Deep Scan</span>
+            <span class="wo-safety-ai-verdict" id="wo-tx-ai-verdict"></span>
+          </div>
+          <div class="wo-safety-ai-body" id="wo-tx-ai-body"></div>
+        </div>
+
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="wo-btn wo-btn-sm" id="wo-tx-ai-scan" title="AI Deep Scan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            AI Scan
+          </button>
+          <button class="wo-btn wo-btn-sm wo-btn-full" id="wo-tx-approve-reject">Reject</button>
+          <button class="wo-btn wo-btn-primary wo-btn-sm wo-btn-full" id="wo-tx-approve-confirm">Approve</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="wo-setup-overlay" class="wo-setup-overlay" style="display:none">
+      <div class="wo-setup-card">
+        <div class="wo-setup-icon">
+          <img src="logo.png" style="width:64px;height:64px;object-fit:contain;border-radius:50%">
+        </div>
+        <h2 class="wo-setup-title">WhiteOwl Companion Required</h2>
+        <p class="wo-setup-desc">
+          WhiteOwl extension connects to a local companion server on your machine for AI analysis, wallet operations, and real-time token data.
+        </p>
+        <div class="wo-setup-steps">
+          <div class="wo-setup-step">
+            <span class="wo-setup-step-num">1</span>
+            <div class="wo-setup-step-body">
+              <div class="wo-setup-step-title">Install WhiteOwl Server</div>
+              <div class="wo-setup-step-sub">Clone the repo and install dependencies with <code>npm install</code></div>
+            </div>
+          </div>
+          <div class="wo-setup-step">
+            <span class="wo-setup-step-num">2</span>
+            <div class="wo-setup-step-body">
+              <div class="wo-setup-step-title">Start the Server</div>
+              <div class="wo-setup-step-sub">Run <code>npx tsx src/index.ts server</code> to start on port 3377</div>
+            </div>
+          </div>
+          <div class="wo-setup-step">
+            <span class="wo-setup-step-num">3</span>
+            <div class="wo-setup-step-body">
+              <div class="wo-setup-step-title">Return Here</div>
+              <div class="wo-setup-step-sub">The panel will auto-connect when the server is running</div>
+            </div>
+          </div>
+        </div>
+        <div class="wo-setup-status">
+          <span class="wo-setup-pulse"></span>
+          <span>Waiting for server&hellip;</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="wo-consent-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background:#ffffff;align-items:center;justify-content:center;padding:20px 16px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;overflow-y:auto">
+    <div style="background:#fff;border-radius:20px;padding:36px 24px 28px;max-width:380px;width:100%;margin:auto">
+      <img src="logo.png" style="display:block;width:52px;height:52px;margin:0 auto 16px;border-radius:50%;box-shadow:0 2px 12px rgba(139,92,246,0.15)" alt="">
+      <h2 style="text-align:center;font-size:18px;font-weight:800;color:#1a1f2e;margin:0 0 4px;font-family:'Oxanium','Inter',sans-serif;letter-spacing:0.3px">WhiteOwl</h2>
+      <p style="text-align:center;font-size:11px;color:#8b5cf6;margin:0 0 20px;letter-spacing:0.6px;text-transform:uppercase;font-weight:700">Data Disclosure</p>
+      <p style="font-size:13px;color:#5a6575;margin:0 0 14px;line-height:1.5">Before you use WhiteOwl, please review how we handle your data:</p>
+      <div style="background:#f5f6f9;border:1px solid #ebedf2;border-radius:14px;padding:16px 18px;margin:0 0 16px">
+        <ul style="margin:0;padding:0;font-size:12.5px;color:#5a6575;line-height:1.6;list-style:none">
+          <li style="margin-bottom:10px;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#8b5cf6;font-weight:700">›</span><strong style="color:#1a1f2e">Page content &amp; tab URLs</strong> — read on supported crypto sites to detect tokens and provide analysis.</li>
+          <li style="margin-bottom:10px;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#8b5cf6;font-weight:700">›</span><strong style="color:#1a1f2e">Axiom auth tokens</strong> — intercepted from axiom.trade requests so you can trade without leaving the panel. Stored locally only.</li>
+          <li style="margin-bottom:10px;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#8b5cf6;font-weight:700">›</span><strong style="color:#1a1f2e">Tab screenshots</strong> — captured only when you press the Inspector button. Sent to your local server for AI analysis.</li>
+          <li style="margin-bottom:10px;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#8b5cf6;font-weight:700">›</span><strong style="color:#1a1f2e">Chat messages</strong> — sent to your local WhiteOwl server for AI processing. Never sent to third parties.</li>
+          <li style="margin-bottom:0;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:#8b5cf6;font-weight:700">›</span><strong style="color:#1a1f2e">Wallet data</strong> — private keys encrypted with your PIN and stored locally in the browser. Never transmitted.</li>
+        </ul>
+      </div>
+      <p style="font-size:12px;color:#7a8594;margin:0 0 10px;line-height:1.55">All data stays on your machine or goes to <strong style="color:#1a1f2e">your local server</strong> (localhost). Nothing is collected by us or shared with advertisers.
+        <a href="https://whiteowl.wtf/privacy" target="_blank" rel="noopener" style="color:#8b5cf6;text-decoration:none;border-bottom:1px solid rgba(139,92,246,0.3)">Full Privacy Policy</a>
+      </p>
+      <p style="font-size:11px;color:#9aa4b0;margin:0 0 20px;line-height:1.5;font-style:italic">Use of information from Google APIs adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" target="_blank" rel="noopener" style="color:#7c3aed;text-decoration:none">Chrome Web Store User Data Policy</a>, including Limited Use requirements.</p>
+      <div style="display:flex;gap:10px">
+        <button id="wo-consent-agree" style="flex:1;padding:12px 0;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;box-shadow:0 4px 16px rgba(139,92,246,0.25);font-family:inherit;transition:all 0.2s ease">I Agree</button>
+        <button id="wo-consent-decline" style="flex:1;padding:12px 0;border:1px solid #dfe2e8;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;background:#f5f6f9;color:#5a6575;font-family:inherit;transition:all 0.2s ease">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="i18n-ext.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

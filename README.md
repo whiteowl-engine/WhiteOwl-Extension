@@ -1,0 +1,137 @@
+# WhiteOwl Extension
+
+Open-source browser extension and wallet companion for the WhiteOwl panel.
+
+This repository is intended to be the standalone split of the extension layer that works next to the main WhiteOwl panel/backend. It contains the Chrome Manifest V3 extension, side panel UI, provider bridge, wallet flows, token context overlays, page inspection tools, and local integration points for the WhiteOwl runtime.
+
+## What This Repo Contains
+
+- Manifest V3 browser extension for Chrome and Chromium-based browsers
+- Side panel UI for token analysis, chat, inspector, and wallet flows
+- Provider bridge injected into supported Solana and trading surfaces
+- Site approval and connection management logic
+- Page data inspection and safety/scanner flows
+- Local-first wallet and keystore logic stored in extension storage
+
+## What This Repo Does Not Contain
+
+- The main WhiteOwl panel/backend application
+- Backend API implementation
+- Hosted infrastructure or cloud deployment config
+- A packaged Web Store release artifact
+
+By default the extension expects a WhiteOwl panel/backend at `http://localhost:3377`. The backend URL can be changed through extension storage by setting `wo_server_url`.
+
+## Repository Layout
+
+- `manifest.json` - extension manifest and permissions
+- `background.js` - background service worker, message relay, backend bridge
+- `content.js` - page overlays, page analysis, scanner and capture logic
+- `provider.js` - injected wallet/provider bridge for supported sites
+- `sidepanel.html` - side panel markup
+- `sidepanel.css` - side panel styles
+- `sidepanel.js` - side panel application logic and wallet UI flows
+- `i18n-ext.js` - runtime translation helper
+- `_locales/en/messages.json` - English store metadata strings
+- `lightweight-charts.js` - bundled third-party chart library with preserved license header
+- `scripts/validate.mjs` - repository hygiene and syntax validator
+
+## Core Features
+
+- Token context side panel for live market and page-aware analysis
+- WhiteOwl chat entry point inside the browser side panel
+- Page inspector for capturing structured on-page context into the panel
+- Local wallet flows for PIN, keystore, signing, import and recovery
+- dApp/provider bridge for supported Solana surfaces
+- Safety-oriented site connection review and page scanning
+- Local bridge to the WhiteOwl panel for token, image, scanner and wallet actions
+
+## Development
+
+### Requirements
+
+- Chrome or another Chromium browser with Manifest V3 support
+- Node.js 20 or newer for validation scripts
+- WhiteOwl panel/backend running locally or reachable through a configured backend URL
+
+### Load Unpacked
+
+1. Open `chrome://extensions`.
+2. Enable Developer mode.
+3. Select Load unpacked.
+4. Choose this repository root.
+5. Pin the extension and open the side panel.
+
+### Validation
+
+Run the repository validation before publishing or tagging:
+
+```bash
+npm run check
+```
+
+The validator checks:
+
+- JavaScript syntax for the extension entry files
+- Presence of Cyrillic characters across tracked text files
+- Comment markers in extension source files
+
+The bundled `lightweight-charts.js` file is intentionally excluded from the comment check because its Apache 2.0 license header must remain intact.
+
+## Backend Integration
+
+The extension is not a fully isolated product. It is a companion layer for the WhiteOwl panel.
+
+- Default API target: `http://localhost:3377`
+- Local override key: `chrome.storage.local.wo_server_url`
+- Expected backend responsibilities include token enrichment, image scanning, panel chat/runtime integration, and selected wallet-related server endpoints
+
+If the backend is offline, the extension UI still loads, but features that depend on the panel runtime will degrade or stay unavailable.
+
+## Permissions Summary
+
+- `activeTab` - current page interactions initiated by the user
+- `sidePanel` - browser side panel UI
+- `storage` - local extension state, approvals, keystore and settings
+- `tabs` - tab messaging and active page coordination
+- `webRequest` - request inspection or compatibility logic used by the extension runtime
+- `cookies` - site/session interoperability where required by the extension flows
+- `alarms` - background timing and retry flows
+
+The extension also injects content scripts and provider logic into the trading, wallet and social domains listed in `manifest.json`.
+
+## Security Notes
+
+- This repository includes wallet-related code and local signing flows.
+- The codebase should be reviewed carefully before using it with real funds.
+- Keep the backend local unless you explicitly trust the configured WhiteOwl server.
+- Review `SECURITY.md` before publishing production builds.
+
+## Privacy Notes
+
+- The extension stores operational state locally in extension storage.
+- Data collection and provider-side activation are consent-gated in the UI.
+- Review `PRIVACY.md` for a concrete breakdown of storage and network behavior.
+
+## Third-Party Code
+
+This repository currently vendors TradingView Lightweight Charts in `lightweight-charts.js`.
+
+- License: Apache License 2.0
+- Notice file: `THIRD_PARTY_NOTICES.md`
+
+## Suggested Repository Positioning
+
+Recommended GitHub description:
+
+`Open-source browser extension and wallet companion for the WhiteOwl panel.`
+
+Recommended topics:
+
+- `whiteowl`
+- `chrome-extension`
+- `manifest-v3`
+- `solana`
+- `wallet`
+- `sidepanel`
+- `ai`

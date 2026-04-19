@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3d5a80"/>
+      <stop offset="100%" stop-color="#2b3e54"/>
+    </radialGradient>
+    <radialGradient id="body" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#f4a832"/>
+      <stop offset="100%" stop-color="#d4841a"/>
+    </radialGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="96" fill="url(#bg)"/>
+  <!-- Body -->
+  <ellipse cx="100" cy="128" rx="48" ry="50" fill="url(#body)"/>
+  <!-- Belly -->
+  <ellipse cx="100" cy="140" rx="30" ry="32" fill="#f9d589" opacity=".65"/>
+  <!-- Head -->
+  <ellipse cx="100" cy="82" rx="42" ry="38" fill="url(#body)"/>
+  <!-- Ear tufts -->
+  <path d="M66 60 L58 30 L82 52Z" fill="#d4841a"/>
+  <path d="M134 60 L142 30 L118 52Z" fill="#d4841a"/>
+  <path d="M68 58 L62 34 L80 52Z" fill="#f4a832"/>
+  <path d="M132 58 L138 34 L120 52Z" fill="#f4a832"/>
+  <!-- Eye whites -->
+  <ellipse cx="80" cy="82" rx="20" ry="20" fill="#fff"/>
+  <ellipse cx="120" cy="82" rx="20" ry="20" fill="#fff"/>
+  <!-- Iris -->
+  <circle cx="82" cy="82" r="12" fill="#2b3e54"/>
+  <circle cx="118" cy="82" r="12" fill="#2b3e54"/>
+  <!-- Pupil -->
+  <circle cx="84" cy="80" r="6" fill="#111"/>
+  <circle cx="116" cy="80" r="6" fill="#111"/>
+  <!-- Eye highlight -->
+  <circle cx="87" cy="77" r="3" fill="#fff" opacity=".8"/>
+  <circle cx="119" cy="77" r="3" fill="#fff" opacity=".8"/>
+  <!-- Beak -->
+  <path d="M93 96 L100 110 L107 96Z" fill="#e8792b"/>
+  <path d="M95 96 L100 106 L105 96Z" fill="#f59542"/>
+  <!-- Wing left -->
+  <path d="M52 115 Q42 140 58 165 Q65 148 62 125Z" fill="#d4841a"/>
+  <!-- Wing right -->
+  <path d="M148 115 Q158 140 142 165 Q135 148 138 125Z" fill="#d4841a"/>
+  <!-- Feet -->
+  <ellipse cx="85" cy="175" rx="12" ry="5" fill="#e8792b"/>
+  <ellipse cx="115" cy="175" rx="12" ry="5" fill="#e8792b"/>
+</svg>

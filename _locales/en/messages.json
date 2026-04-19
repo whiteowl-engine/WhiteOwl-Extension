@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "WhiteOwl — AI Trading Overlay",
+    "description": "Extension name shown in Chrome Web Store and browser toolbar"
+  },
+  "appDescription": {
+    "message": "AI trading overlay for Solana: real-time token analysis, anti-phishing protection, portfolio wallet & chat assistant.",
+    "description": "Extension description shown in Chrome Web Store listing"
+  }
+}
