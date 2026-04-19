@@ -1,15 +1,32 @@
-# WhiteOwl Extension
-
-Open-source browser extension and wallet companion for the WhiteOwl panel.
-
-## Product Preview
-
 <p align="center">
 	<video src="./ex.mp4" controls muted playsinline preload="metadata" poster="./screenshots/chat-surface.png" width="100%"></video>
 </p>
 
+<h1 align="center">WhiteOwl Extension</h1>
+
 <p align="center">
-	Browser-side chat, wallet, inspector and context capture running inside the WhiteOwl extension side panel.
+	<strong>Open-source browser wallet, side panel, and page-context layer for WhiteOwl</strong>
+</p>
+
+<p align="center">
+	Manifest V3 companion extension that runs next to the main WhiteOwl panel and brings wallet flows, provider bridge, inspector, token context, and browser-native controls directly into Chromium.
+</p>
+
+<p align="center">
+	<img src="https://img.shields.io/badge/manifest-v3-111827?style=for-the-badge&logo=googlechrome&logoColor=fbbf24&labelColor=020617" alt="Manifest V3">
+	<img src="https://img.shields.io/badge/chromium-ready-111827?style=for-the-badge&logo=googlechrome&logoColor=7dd3fc&labelColor=020617" alt="Chromium Ready">
+	<img src="https://img.shields.io/badge/package-github%20packages-111827?style=for-the-badge&logo=github&logoColor=ffffff&labelColor=020617" alt="GitHub Packages">
+	<img src="https://img.shields.io/badge/license-MIT-111827?style=for-the-badge&logo=opensourceinitiative&logoColor=a3e635&labelColor=020617" alt="License">
+	<img src="https://img.shields.io/badge/backend-localhost%3A3377-111827?style=for-the-badge&logo=electron&logoColor=5eead4&labelColor=020617" alt="Backend Target">
+</p>
+
+<p align="center">
+	<a href="#install">Install</a> •
+	<a href="#highlights">Highlights</a> •
+	<a href="#companion-stack">Companion Stack</a> •
+	<a href="#screenshots">Screenshots</a> •
+	<a href="#development">Development</a> •
+	<a href="#releases">Releases</a>
 </p>
 
 <p align="center">
@@ -18,9 +35,20 @@ Open-source browser extension and wallet companion for the WhiteOwl panel.
 	<a href="https://github.com/whiteowl-engine/WhiteOwl">Main WhiteOwl panel</a>
 </p>
 
+---
+
+## Highlights
+
+| Surface | What it does |
+|---|---|
+| **Browser Wallet** | Local wallet flows, connected-site state, approvals, and signing surfaces inside Chromium |
+| **Side Panel** | WhiteOwl chat, token context, quick actions, settings, and operator controls next to the page |
+| **Page Context** | Inspector and capture tools that move structured browser context back into the WhiteOwl desk |
+| **Panel Bridge** | Local integration with the main WhiteOwl runtime for chat, token enrichment, image scanning, and wallet-related flows |
+
 This repository is intended to be the standalone split of the extension layer that works next to the main WhiteOwl panel/backend. It contains the Chrome Manifest V3 extension, side panel UI, provider bridge, wallet flows, token context overlays, page inspection tools, and local integration points for the WhiteOwl runtime.
 
-## WhiteOwl Stack
+## Companion Stack
 
 WhiteOwl is split into two repositories that are designed to run together:
 
@@ -28,6 +56,12 @@ WhiteOwl is split into two repositories that are designed to run together:
 - Browser wallet and side panel extension: `https://github.com/whiteowl-engine/WhiteOwl-Extension`
 
 The main WhiteOwl repo is the dashboard, local backend runtime, AI agent layer, automation surface, market data plane, and chat server. This extension repo is the in-browser wallet, provider bridge, site connection layer, inspector, and page-aware side panel. Together they form the full WhiteOwl operator workflow.
+
+## What Is WhiteOwl Extension?
+
+WhiteOwl Extension is the browser-native half of the WhiteOwl stack. It takes the runtime, models, and backend services exposed by the main panel and puts the wallet, provider bridge, page inspector, and side panel directly next to the site you are operating on.
+
+The result is a local-first workflow where WhiteOwl can combine panel-side intelligence with real browser context, connected-site state, and in-page actions without turning the extension into a separate hosted product.
 
 ## Screenshots
 
