@@ -38,6 +38,30 @@ The main WhiteOwl repo is the dashboard, local backend runtime, AI agent layer, 
 	</tr>
 </table>
 
+## Product Preview
+
+<p align="center">
+	<video src="./ex.mp4" controls muted playsinline preload="metadata" poster="./screenshots/chat-surface.png" width="100%"></video>
+</p>
+
+<p align="center">
+	Browser-side chat, wallet, inspector and context capture running inside the WhiteOwl extension side panel.
+</p>
+
+<p align="center">
+	<a href="./ex.mp4">Open preview video</a> •
+	<a href="https://github.com/whiteowl-engine/WhiteOwl-Extension/releases/latest">Latest release</a> •
+	<a href="https://github.com/whiteowl-engine/WhiteOwl">Main WhiteOwl panel</a>
+</p>
+
+## Install
+
+1. Start the main WhiteOwl panel/backend from `https://github.com/whiteowl-engine/WhiteOwl`.
+2. Download the latest packaged build from `https://github.com/whiteowl-engine/WhiteOwl-Extension/releases/latest` or clone this repository for unpacked installation.
+3. Open `chrome://extensions`, enable Developer mode, then load the unpacked repository or extracted release archive.
+4. Keep the default server target `http://localhost:3377` or point `wo_server_url` to your running WhiteOwl panel.
+5. Pin the extension, open the side panel, and use the wallet, chat, inspector and page-aware WhiteOwl flows directly in the browser.
+
 ## What This Repo Contains
 
 - Manifest V3 browser extension for Chrome and Chromium-based browsers
