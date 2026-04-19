@@ -1,11 +1,5 @@
 <p align="center">
-	<a href="./ex.mp4" title="Open ex.mp4 preview">
-		<img src="./screenshots/chat-surface.png" alt="WhiteOwl Extension preview video" width="100%">
-	</a>
-</p>
-
-<p align="center">
-	<a href="./ex.mp4"><strong>Open ex.mp4 preview</strong></a>
+	<img src="./ex.gif" alt="WhiteOwl Extension preview" width="100%">
 </p>
 
 <h1 align="center">WhiteOwl Extension</h1>
