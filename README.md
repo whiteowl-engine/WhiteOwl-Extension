@@ -4,6 +4,40 @@ Open-source browser extension and wallet companion for the WhiteOwl panel.
 
 This repository is intended to be the standalone split of the extension layer that works next to the main WhiteOwl panel/backend. It contains the Chrome Manifest V3 extension, side panel UI, provider bridge, wallet flows, token context overlays, page inspection tools, and local integration points for the WhiteOwl runtime.
 
+## WhiteOwl Stack
+
+WhiteOwl is split into two repositories that are designed to run together:
+
+- Main panel and backend: `https://github.com/whiteowl-engine/WhiteOwl`
+- Browser wallet and side panel extension: `https://github.com/whiteowl-engine/WhiteOwl-Extension`
+
+The main WhiteOwl repo is the dashboard, local backend runtime, AI agent layer, automation surface, market data plane, and chat server. This extension repo is the in-browser wallet, provider bridge, site connection layer, inspector, and page-aware side panel. Together they form the full WhiteOwl operator workflow.
+
+## Screenshots
+
+<table>
+	<tr>
+		<td width="50%" valign="top">
+			<img src="./screenshots/wallet-overview.png" alt="WhiteOwl wallet overview" width="100%">
+			<p><strong>Wallet surface</strong><br>Balances, quick wallet actions, active site context, and token holdings inside the browser side panel.</p>
+		</td>
+		<td width="50%" valign="top">
+			<img src="./screenshots/chat-surface.png" alt="WhiteOwl chat surface" width="100%">
+			<p><strong>Chat surface</strong><br>Panel-linked WhiteOwl chat available directly inside the extension side panel.</p>
+		</td>
+	</tr>
+	<tr>
+		<td width="50%" valign="top">
+			<img src="./screenshots/inspector-surface.png" alt="WhiteOwl inspector surface" width="100%">
+			<p><strong>Inspector surface</strong><br>Capture page fragments and route clean context from the browser into the WhiteOwl desk.</p>
+		</td>
+		<td width="50%" valign="top">
+			<img src="./screenshots/wallet-settings.png" alt="WhiteOwl wallet settings" width="100%">
+			<p><strong>Wallet settings</strong><br>Wallet, network, security, connected site, and service controls in the extension settings layer.</p>
+		</td>
+	</tr>
+</table>
+
 ## What This Repo Contains
 
 - Manifest V3 browser extension for Chrome and Chromium-based browsers
