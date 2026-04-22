@@ -43,6 +43,7 @@
 |---|---|
 | **Browser Wallet** | Local wallet flows, connected-site state, approvals, and signing surfaces inside Chromium |
 | **Token Launcher** | One-click token deployment to pump.fun with metadata, social links, and advanced launch modes (Mayhem, Tokenized agent, Cashback) |
+| **Twitter Scanner** | Automatic detection and scanning of Solana contract addresses (CA) directly from Twitter/X posts with one-click analysis |
 | **Side Panel** | WhiteOwl chat, token context, quick actions, settings, and operator controls next to the page |
 | **Page Context** | Inspector and capture tools that move structured browser context back into the WhiteOwl desk |
 | **Panel Bridge** | Local integration with the main WhiteOwl runtime for chat, token enrichment, image scanning, and wallet-related flows |
@@ -97,6 +98,12 @@ The result is a local-first workflow where WhiteOwl can combine panel-side intel
 			<p><strong>Token Launch Console</strong><br>Full-featured token deployment with metadata, social links, Mayhem mode (fee routing for price velocity), Tokenized agent (automated buyback), and creator cashback distribution.</p>
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2" valign="top">
+			<img src="./screenshots/whiteowl-banner.png" alt="WhiteOwl Twitter contract scanner" width="100%">
+			<p><strong>Twitter Contract Scanner</strong><br>Automatic detection of Solana contract addresses in Twitter/X posts. Click "Scan CA" to instantly analyze any token mentioned in tweets with full WhiteOwl context, security checks, and market data.</p>
+		</td>
+	</tr>
 </table>
 
 ## Install
@@ -141,6 +148,7 @@ By default the extension expects a WhiteOwl panel/backend at `http://localhost:3
 
 ## Core Features
 
+- **Twitter Contract Scanner** - Automatic detection of Solana contract addresses (CA) in Twitter/X posts with one-click "Scan CA" button for instant token analysis, security checks, and market data
 - **Token Launch Console** - One-click token deployment to pump.fun directly from browser with advanced launch modes:
   - **Mayhem mode** - Route fees to reserved recipients for higher price-action velocity
   - **Tokenized agent** - Attach fee-sharing config for automated buyback
