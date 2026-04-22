@@ -42,6 +42,7 @@
 | Surface | What it does |
 |---|---|
 | **Browser Wallet** | Local wallet flows, connected-site state, approvals, and signing surfaces inside Chromium |
+| **Token Launcher** | One-click token deployment to pump.fun with metadata, social links, and advanced launch modes (Mayhem, Tokenized agent, Cashback) |
 | **Side Panel** | WhiteOwl chat, token context, quick actions, settings, and operator controls next to the page |
 | **Page Context** | Inspector and capture tools that move structured browser context back into the WhiteOwl desk |
 | **Panel Bridge** | Local integration with the main WhiteOwl runtime for chat, token enrichment, image scanning, and wallet-related flows |
@@ -84,6 +85,16 @@ The result is a local-first workflow where WhiteOwl can combine panel-side intel
 		<td width="50%" valign="top">
 			<img src="./screenshots/wallet-settings.png" alt="WhiteOwl wallet settings" width="100%">
 			<p><strong>Wallet settings</strong><br>Wallet, network, security, connected site, and service controls in the extension settings layer.</p>
+		</td>
+	</tr>
+	<tr>
+		<td width="50%" valign="top">
+			<img src="./screenshots/token-launch-tweet.png" alt="WhiteOwl token launch tweet" width="100%">
+			<p><strong>Token Launch - Twitter integration</strong><br>Deploy tokens directly from Twitter/X posts with one-click launch to pump.fun.</p>
+		</td>
+		<td width="50%" valign="top">
+			<img src="./screenshots/token-launch-console.png" alt="WhiteOwl token launch console" width="100%">
+			<p><strong>Token Launch Console</strong><br>Full-featured token deployment with metadata, social links, Mayhem mode (fee routing for price velocity), Tokenized agent (automated buyback), and creator cashback distribution.</p>
 		</td>
 	</tr>
 </table>
@@ -130,6 +141,10 @@ By default the extension expects a WhiteOwl panel/backend at `http://localhost:3
 
 ## Core Features
 
+- **Token Launch Console** - One-click token deployment to pump.fun directly from browser with advanced launch modes:
+  - **Mayhem mode** - Route fees to reserved recipients for higher price-action velocity
+  - **Tokenized agent** - Attach fee-sharing config for automated buyback
+  - **Cash back** - Enable on-chain cashback flag for creator reward redistribution
 - Token context side panel for live market and page-aware analysis
 - WhiteOwl chat entry point inside the browser side panel
 - Page inspector for capturing structured on-page context into the panel
