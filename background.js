@@ -668,7 +668,7 @@ async function syncAxiomCookies() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ cookies: payload }),
         });
-        const result = await resp.json();
+        await resp.json();
     }
     catch { }
 }

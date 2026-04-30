@@ -922,9 +922,10 @@
             const d = document.createElement('div');
             d.className = 'wo-msg ai';
             let html = '<div class="wo-msg-head"><span class="wo-msg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span> WHITEOWL</div>';
-            html += '<img src="data:image/png;base64,' + m.image + '" style="max-width:100%;border-radius:8px;margin-top:6px;" />';
+            const safeImage = String(m.image || '').replace(/[^A-Za-z0-9+/=]/g, '');
+            html += '<img src="data:image/png;base64,' + safeImage + '" style="max-width:100%;border-radius:8px;margin-top:6px;" />';
             if (m.caption)
-                html += '<div style="margin-top:4px;font-size:12px;opacity:0.7;">' + m.caption.replace(/</g, '&lt;') + '</div>';
+                html += '<div style="margin-top:4px;font-size:12px;opacity:0.7;">' + esc(String(m.caption)) + '</div>';
             d.innerHTML = html;
             c.appendChild(d);
             c.scrollTop = c.scrollHeight;
@@ -1060,7 +1061,7 @@
             d.textContent = content;
         }
         else {
-            d.innerHTML = content;
+            d.textContent = content;
         }
         c.appendChild(d);
         c.scrollTop = c.scrollHeight;
@@ -1133,17 +1134,20 @@
         const c = $('#wo-messages');
         if (!c)
             return;
+        const safeId = parseInt(id, 10);
+        if (!Number.isFinite(safeId))
+            return;
         const d = document.createElement('div');
         d.className = 'wo-checkpoint';
-        d.setAttribute('data-checkpoint-id', id);
+        d.setAttribute('data-checkpoint-id', safeId);
         const time = new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         d.innerHTML =
             '<div class="wo-checkpoint-line"></div>' +
                 '<div class="wo-checkpoint-pill">' +
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' +
-                'CP #' + id + ' \u00b7 ' + esc(time) +
+                'CP #' + safeId + ' \u00b7 ' + esc(time) +
                 '</div>' +
-                '<button class="wo-checkpoint-btn" data-cp-id="' + id + '">' +
+                '<button class="wo-checkpoint-btn" data-cp-id="' + safeId + '">' +
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>' +
                 'Restore' +
                 '</button>' +
@@ -1173,7 +1177,8 @@
         const c = $('#wo-messages');
         if (!c)
             return;
-        const cpId = m.checkpointId;
+        const cpId = parseInt(m.checkpointId, 10);
+        if (!Number.isFinite(cpId)) return;
         const cpEl = document.querySelector('.wo-checkpoint[data-checkpoint-id="' + cpId + '"]');
         if (cpEl) {
             while (cpEl.nextElementSibling) {

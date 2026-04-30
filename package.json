@@ -1,6 +1,6 @@
 {
   "name": "@whiteowl-engine/extension",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": false,
   "description": "Standalone WhiteOwl browser extension and wallet companion.",
   "repository": {
